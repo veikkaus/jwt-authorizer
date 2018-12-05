@@ -1,0 +1,31 @@
+{
+  "name": "jwt-authorizer",
+  "version": "0.1.0",
+  "sources": [
+    {
+      "dir" : "src",
+      "subdirs" : true
+    },
+    {
+      "dir": "test",
+      "type": "dev"
+    }
+  ],
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".js",
+  "bs-dependencies": [
+    "@glennsl/bs-json",
+    "bs-yarp"
+  ],
+  "bs-dev-dependencies": [
+    "bs-mocha"
+  ],
+  "warnings": {
+    "error" : "+101"
+  },
+  "namespace": true,
+  "refmt": 3
+}

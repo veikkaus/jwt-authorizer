@@ -1,0 +1,10 @@
+/lib/
+/build/
+/node_modules/
+.DS_Store
+.merlin
+.bsb.lock
+.vscode
+npm-debug.log
+src/**/*.js
+test/**/*.js

@@ -1,0 +1,41 @@
+{
+  "name": "jwt-authorizer",
+  "version": "0.1.0",
+  "description": "JWT Authorizer",
+  "author": "Kundi Team - Veikkaus",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://pgit1.ray.fi/projects/KUNDI/repos/kundi-aws"
+  },
+  "scripts": {
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
+    "test": "npm run clean && npm run build && SECRETS_MANAGER_KEY='' MAX_AGE='600' mocha",
+    "deploy:kundi-stg": "npm run clean && npm run build && sls deploy --stage stg",
+    "deploy:kundi-prod": "npm run clean && npm run build && sls deploy --stage prod",
+    "deploy:supi-stg": "npm run clean && npm run build && sls deploy --stage supi-stg",
+    "deploy:supi-prod": "npm run clean && npm run build && sls deploy --stage supi-prod"
+  },
+  "keywords": [
+    "BuckleScript"
+  ],
+  "dependencies": {
+    "@glennsl/bs-json": "3.0.0",
+    "aws-sdk": "2.360.0",
+    "bs-platform": "4.0.8",
+    "bs-yarp": "0.3.0",
+    "jsonwebtoken": "8.4.0",
+    "jwk-to-pem": "2.0.0"
+  },
+  "devDependencies": {
+    "bs-mocha": "0.4.0",
+    "node-rsa": "1.0.2",
+    "ramda": "0.26.1",
+    "serverless-webpack": "5.2.0",
+    "webpack": "4.27.1",
+    "webpack-cli": "3.1.2",
+    "webpack-node-externals": "1.7.2"
+  }
+}
