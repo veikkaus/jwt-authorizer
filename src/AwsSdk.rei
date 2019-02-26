@@ -5,7 +5,8 @@ module SecretsManager {
 
   [@bs.deriving abstract]
   type config = {
-    endpoint: string
+    endpoint: option(string),
+    region: option(string)
   };
 
   let create: option(config) => sm;

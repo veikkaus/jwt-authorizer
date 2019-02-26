@@ -8,7 +8,8 @@ module SecretsManager {
 
   [@bs.deriving abstract]
   type config = {
-    endpoint: string
+    endpoint: option(string),
+    region: option(string)
   };
 
   [@bs.new] [@bs.module "aws-sdk"] external create: option(config) => sm = "SecretsManager";
