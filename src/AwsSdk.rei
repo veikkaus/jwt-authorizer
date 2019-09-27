@@ -1,5 +1,3 @@
-open BsYarp;
-
 module SecretsManager {
   type sm;
 
@@ -19,5 +17,5 @@ module SecretsManager {
     versionId: string
   };
 
-  let getSecretValue: sm => string => Promise.t(secretData);
+  let getSecretValue: sm => string => Future.t(Belt.Result.t(secretData, exn));
 };

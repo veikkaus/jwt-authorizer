@@ -1,6 +1,6 @@
 {
   "name": "jwt-authorizer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "JWT Authorizer",
   "author": "Kundi Team - Veikkaus",
   "license": "MIT",
@@ -9,24 +9,25 @@
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
-    "test": "npm run clean && npm run build && SECRETS_MANAGER_KEY='' MAX_AGE='600' mocha"
+    "test": "npm run clean && npm run build && SECRETS_MANAGER_KEY='' MAX_AGE='600' mocha ./lib/js/test/"
   },
   "keywords": [
     "BuckleScript"
   ],
   "dependencies": {
-    "@glennsl/bs-json": "3.0.0",
-    "aws-sdk": "2.360.0",
-    "bs-yarp": "0.3.0",
-    "jsonwebtoken": "8.4.0",
-    "jwk-to-pem": "2.0.0"
+    "@glennsl/bs-json": "5.0.1",
+    "aws-sdk": "2.537.0",
+    "jsonwebtoken": "8.5.1",
+    "jwk-to-pem": "2.0.1",
+    "reason-future": "2.5.0"
   },
   "peerDependencies": {
-    "bs-platform" :"^4.0.18"
+    "bs-platform": ">= 5.0.0"
   },
   "devDependencies": {
-    "bs-mocha": "0.4.0",
-    "node-rsa": "1.0.2",
+    "bs-mocha": "1.0.0",
+    "bs-platform": "5.0.6",
+    "node-rsa": "1.0.6",
     "ramda": "0.26.1"
   }
 }

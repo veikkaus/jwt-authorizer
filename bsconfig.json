@@ -1,6 +1,6 @@
 {
   "name": "jwt-authorizer",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "sources": [
     {
       "dir" : "src",
@@ -13,12 +13,12 @@
   ],
   "package-specs": {
     "module": "commonjs",
-    "in-source": true
+    "in-source": false
   },
   "suffix": ".js",
   "bs-dependencies": [
     "@glennsl/bs-json",
-    "bs-yarp"
+    "reason-future"
   ],
   "bs-dev-dependencies": [
     "bs-mocha"

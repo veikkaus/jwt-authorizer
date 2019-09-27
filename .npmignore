@@ -3,3 +3,6 @@
 yarn.lock
 .bsb.lock
 .merlin
+
+/test/
+.vscode/

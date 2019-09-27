@@ -1,5 +1,3 @@
-open BsYarp;
-
 type publicJwk = {
   alg: string,
   kty: string,
@@ -37,9 +35,17 @@ module Decode {
   };
 }
 
+let parseJsonResult: string => Belt.Result.t(Js.Json.t, exn) =
+  data => try (Ok(Json.parseOrRaise(data))) {
+    | e => Error(e)
+  };
+
 let getJwkListFromSecretsManager = secretsManagerConfig => secretsManagerKey =>
   AwsSdk.SecretsManager.create(secretsManagerConfig)
   -> AwsSdk.SecretsManager.getSecretValue(secretsManagerKey)
-  -> Promise.mapOk(data => Json.parseOrRaise(data.secretString))
-  -> Promise.mapOkResult(Decode.jwkList)
-  -> Promise.toJs
+  -> Future.map(
+    result =>
+      result
+      -> Belt.Result.flatMap(data => parseJsonResult(data.secretString))
+      -> Belt.Result.flatMap(Decode.jwkList))
+  -> FutureJs.resultToPromise;

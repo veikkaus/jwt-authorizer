@@ -1,6 +1,7 @@
-open BsYarp;
-
 type nodeCb('a, 'e) = (Js.Nullable.t('e), Js.Nullable.t('a)) => unit;
+
+let convertToExn: 'e => exn =
+  [%bs.raw {| function(raw_e) { return Caml_js_exceptions.internalToOCamlException(raw_e); } |} ];
 
 module SecretsManager {
 
@@ -28,7 +29,7 @@ module SecretsManager {
     [@bs.as "VersionId"] versionId: string
   };
 
-  [@bs.send] external getSecretValue: (sm, gsvParams, nodeCb(secretDataJs, Js.Exn.t)) => unit  = "";
+  [@bs.send] external getSecretValue: (sm, gsvParams, nodeCb(secretDataJs, Js.Exn.t)) => unit  = "getSecretValue";
 
   type secretData = {
     arn: string,
@@ -47,8 +48,19 @@ module SecretsManager {
       versionId: versionIdGet(data)
     });
 
-  let getSecretValue: sm => string => Promise.t(secretData) =
+  let getSecretValue: sm => string => Future.t(Belt.Result.t(secretData, exn)) =
     (smObj, secretId) =>
-      Promise.makeWithCb(cb => getSecretValue(smObj, {"SecretId": secretId, "VersionStage": "AWSCURRENT"}, cb))
-      -> Promise.mapOk(secretDataFromJs);
+      Future.make(resolve => {
+        let nodeCb: nodeCb('a, 'e) =
+          (error, value) => switch (Js.Nullable.toOption(error), Js.Nullable.toOption(value)) {
+            | (_, Some(value)) => resolve(Belt.Result.Ok(value))
+            | (errorOpt, _) => resolve(
+              errorOpt
+              -> Belt.Option.map(convertToExn)
+              -> Belt.Option.getWithDefault(Invalid_argument("Callback error"))
+              -> Belt.Result.Error)
+          };
+        getSecretValue(smObj, {"SecretId": secretId, "VersionStage": "AWSCURRENT"}, nodeCb);
+      })
+      -> Future.mapOk(secretDataFromJs);
 };

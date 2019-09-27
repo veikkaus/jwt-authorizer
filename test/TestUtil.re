@@ -7,7 +7,7 @@ type readFileOpt = {.
 let readFile: string => string =
   filename => readFileExternal(filename, {"encoding": "utf8", "flag": "r"});
 
-[@bs.val] [@bs.module "../scripts/jwksLib.js"] external updateJwksExternal: Js.t({.}) => string => string => string = "updateJwks";
+[@bs.val] [@bs.module "../../../scripts/jwksLib.js"] external updateJwksExternal: Js.t({.}) => string => string => string = "updateJwks";
 
 let getTestJwkList: unit => list(Jwk.publicJwk) =
   () =>
