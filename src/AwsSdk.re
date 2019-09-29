@@ -1,7 +1,9 @@
 type nodeCb('a, 'e) = (Js.Nullable.t('e), Js.Nullable.t('a)) => unit;
 
 let convertToExn: 'e => exn =
-  [%bs.raw {| function(raw_e) { return Caml_js_exceptions.internalToOCamlException(raw_e); } |} ];
+  error => try (Js.Exn.raiseError(Js.String.make(error))) {
+    | e => e
+  };
 
 module SecretsManager {
 
