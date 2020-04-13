@@ -1,6 +1,6 @@
 {
   "name": "jwt-authorizer",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "JWT Authorizer",
   "author": "Kundi Team - Veikkaus",
   "license": "MIT",
@@ -15,10 +15,10 @@
     "BuckleScript"
   ],
   "dependencies": {
-    "@glennsl/bs-json": "5.0.1",
-    "aws-sdk": "2.537.0",
+    "@glennsl/bs-json": "5.0.2",
+    "aws-sdk": "2.656.0",
     "jsonwebtoken": "8.5.1",
-    "jwk-to-pem": "2.0.1",
+    "jwk-to-pem": "2.0.3",
     "reason-future": "2.5.0"
   },
   "peerDependencies": {
@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "bs-mocha": "1.0.0",
-    "bs-platform": "5.0.6",
-    "node-rsa": "1.0.6",
-    "ramda": "0.26.1"
+    "bs-platform": "7.2.2",
+    "node-rsa": "1.0.8",
+    "ramda": "0.27.0"
   }
 }
