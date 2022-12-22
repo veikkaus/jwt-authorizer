@@ -17,7 +17,7 @@
   "dependencies": {
     "@glennsl/bs-json": "5.0.2",
     "aws-sdk": "2.814.0",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "jwk-to-pem": "2.0.3",
     "reason-future": "2.5.0"
   },
